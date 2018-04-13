@@ -14,15 +14,21 @@ func main() {
 		log.Fatal(err)
 	}
 
-	var ip net.IP
-	host, _ := os.Hostname()
-	addrs, _ := net.LookupIP(host)
-	for _, addr := range addrs {
-		if ipv4 := addr.To4(); ipv4 != nil {
-			ip = ipv4
-		}
-	}
+	ip := GetOutboundIP()
 
-	fmt.Printf("Serving current directory %v on http://%v:8080", dir, ip)
+	fmt.Printf("Starting Server\nCurrent directory: %v\nLocal address: http://localhost:8080\nExternal address: http://%v:8080", dir, ip)
 	log.Fatal(http.ListenAndServe(":8080", http.FileServer(http.Dir(dir))))
+}
+
+// Get the ip address of the current machine
+func GetOutboundIP() net.IP {
+	conn, err := net.Dial("udp", "8.8.8.8:80")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer conn.Close()
+
+	local := conn.LocalAddr().(*net.UDPAddr)
+
+	return local.IP
 }
