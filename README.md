@@ -3,7 +3,7 @@ Quickly serve any files on your computer from the command line
 
 Requires golang installed locally
 
-`go get github.com/natethinks/serve`
+`go get github.com/natethinks/serve && go install serve`
 
 Change into the directory you want to serve files from
 
