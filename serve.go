@@ -23,7 +23,6 @@ func main() {
 		}
 	}
 
-	fmt.Printf("Serving current directory %v on %v:8080", dir, ip)
+	fmt.Printf("Serving current directory %v on http://%v:8080", dir, ip)
 	log.Fatal(http.ListenAndServe(":8080", http.FileServer(http.Dir(dir))))
-
 }
