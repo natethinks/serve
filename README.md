@@ -1,7 +1,7 @@
 # serve
 Quickly serve any files on your computer from the command line
 
-Requires golang installed locally
+Requires Go installed locally
 
 `go get github.com/natethinks/serve && go install github.com/natethinks/serve`
 
